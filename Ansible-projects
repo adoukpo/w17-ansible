@@ -3,7 +3,7 @@ pipeline {
 
     environment {
        BRANCH_NAME = 'main'
-       PROJECT_URL = 'https://github.com/adoukpo/geoapp.git'
+       PROJECT_URL = 'https://github.com/adoukpo/w17-ansible.git'
        JFROG_CRED = 'jfrog-cred'
        ARTIFACTPATH = '${ZIP_FILENAME}'
       ARTIFACTTARGETPATH = 'ansible-playbooks${BUILD_ID}.zip'
