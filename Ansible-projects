@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+
+    environment {
+       BRANCH_NAME = 'main'
+       PROJECT_URL = 'https://github.com/adoukpo/geoapp.git'
+       JFROG_CRED = 'jfrog-cred'
+       ARTIFACTPATH = '${ZIP_FILENAME}'
+      ARTIFACTTARGETPATH = 'ansible-playbooks${BUILD_ID}.zip'
+       ARTIFACTORY_URL = 'http://54.197.123.86:8081/artifactory'
+       REPO = 'geoapp'
+      SSH_CREDENTIALS = 'master_ansible-cred'
+      REMOTE_PATH = '/home/ec2-user/ansible-dev'
+      ANSIBLE-SERVER = '67.202.35.1'
+      ZIP_FILENAME = 'ansible-playbook.zip'
+    }
+
+    stages {
+        stage('Git Checkout Code') {
+            steps {
+                git branch: "${BRANCH_NAME}", url: "${PROJECT_URL}"
+            }
+        }
+        stage('Package Ansible Playbook') {
+            steps {
+                sh 'zip -r ${ZIP_FILENAME} *'
+            }
+        }
+        stage('Upload to JFrog') {
+            steps {
+                sh 'jfrog rt u "${ARTIFACTTARGETPATH}", ${REPO}'
+            }
+        }
+        stage('Deploy to Ansible Server') {
+            steps {
+                sh 'scp "${ANSIBLE-SERVER}", "${REMOTE_PATH}"'
+            }
+        }
+    }
+}
