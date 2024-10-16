@@ -28,7 +28,7 @@ pipeline {
         }
         stage('Upload to JFrog') {
             steps {
-                sh 'jfrog rt u "${ARTIFACTTARGETPATH}", ${REPO}'
+                sh 'jfrog rt u "${ARTIFACTTARGETPATH}", "${REPO}"'
             }
         }
         stage('Deploy to Ansible Server') {
