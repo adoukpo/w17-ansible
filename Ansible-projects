@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent Ansible
 
     environment {
        BRANCH_NAME = 'main'
@@ -9,7 +9,7 @@ pipeline {
       ARTIFACTTARGETPATH = 'ansible-playbooks${BUILD_ID}.zip'
        ARTIFACTORY_URL = 'http://54.197.123.86:8081/artifactory'
        REPO = 'geoapp'
-      SSH_CREDENTIALS = 'master_ansible-cred'
+      SSH_CREDENTIALS = 'ansible-master-cred'
       REMOTE_PATH = '/home/ec2-user/ansible-dev'
       ANSIBLE-SERVER = '67.202.35.1'
       ZIP_FILENAME = 'ansible-playbook.zip'
