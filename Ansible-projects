@@ -35,7 +35,8 @@ pipeline {
                         sh """
                             curl -u ${ARTIFACTORY_USER}:${ARTIFACTORY_PASSWORD} \
                                  -T ${ARTIFACTPATH} \
-                            """
+                                 ${ARTIFACTORY_URL}/${REPO}/${ARTIFACTTARGETPATH}
+                        """
                     }
                 }
             }
