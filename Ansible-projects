@@ -11,7 +11,7 @@ pipeline {
        REPO = 'geoapp'
       SSH_CREDENTIALS = 'ansible-master-cred'
       REMOTE_PATH = '/home/ec2-user/ansible-dev'
-      ANSIBLE-SERVER = '67.202.35.1'
+      ANSIBLE_SERVER = '67.202.35.1'
       ZIP_FILENAME = 'ansible-playbook.zip'
     }
 
