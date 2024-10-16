@@ -26,9 +26,18 @@ pipeline {
                 sh 'zip -r ${ZIP_FILENAME} *'
             }
         }
-        stage('Upload to JFrog') {
+        stage('Upload ZIP to JFrog') {
             steps {
-                sh 'jfrog rt u "${ARTIFACTTARGETPATH}", "${REPO}"'
+                withCredentials([usernamePassword(credentialsId: "${JFROG_CRED}", \
+                 usernameVariable: 'ARTIFACTORY_USER', passwordVariable: 'ARTIFACTORY_PASSWORD')]) {
+                    script {
+                        // Upload the artifact using curl
+                        sh """
+                            curl -u ${ARTIFACTORY_USER}:${ARTIFACTORY_PASSWORD} \
+                                 -T ${ARTIFACTPATH} \
+                            """
+                    }
+                }
             }
         }
         stage('Deploy to Ansible Server') {
