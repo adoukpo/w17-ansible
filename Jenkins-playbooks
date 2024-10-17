@@ -12,7 +12,7 @@ pipeline {
         SSH_CREDENTIALS = 'ansible-master-cred'
         BRANCH_NAME = 'main'
         PROJECT_URL = 'https://github.com/adoukpo/w17-ansible.git'
-        ansiblePlaybook(playbook: 'ansible/Jenkins-playbooks.yml')
+        Playbook = 'ansible/Jenkins-playbooks.yml'
     }
 
     stages {
