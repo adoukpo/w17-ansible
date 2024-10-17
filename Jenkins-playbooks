@@ -21,7 +21,7 @@ pipeline {
             }
         }
 
-        stage('Run Ansible Playbook') {
+        stage('Run Jenkins-playbooks.yml') {
             steps {
                 sshagent(credentials: [SSH_CREDENTIALS]) {
                     script {
